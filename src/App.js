@@ -7,9 +7,9 @@ class App extends Component {
   componentDidMount() {
     console.log(store.getState());
   }
-
+  //dispatch data
   addData = () => {
-    let number = store.getState().reducer.number;
+    let number = store.getState().reducerData.number;
     number = number + 1;
     store.dispatch({
       type: 'INC',
@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   minusData = () => {
-    let number = store.getState().reducer.number;
+    let number = store.getState().reducerData.number;
     number = number - 1;
     store.dispatch({
       type: 'DESC',
@@ -26,7 +26,7 @@ class App extends Component {
     });
   };
   render() {
-    const store1 = store.getState().reducer.number;
+    const store1 = store.getState().reducerData.number;
     return (
       <div className="App">
         <h1>{store1}</h1>
@@ -48,3 +48,5 @@ class App extends Component {
 }
 
 export default App;
+
+// store.subscribe(App);

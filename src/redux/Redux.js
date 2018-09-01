@@ -4,9 +4,8 @@ import { createStore, combineReducers } from 'redux';
 const initialStateData = {
   number: 0
 };
-
 //Reducer
-const reducer = (state = initialStateData, action) => {
+const reducerData = (state = initialStateData, action) => {
   switch (action.type) {
     case 'INC':
       state = { ...state, number: action.payload };
@@ -20,8 +19,28 @@ const reducer = (state = initialStateData, action) => {
   return state;
 };
 
+//state
+const initialStateWord = {
+  word: ''
+};
+
+const reducerWord = (state = initialStateWord, action) => {
+  switch (action.type) {
+    case 'Tambah':
+      state = { ...state, word: action.payload };
+      break;
+
+    default:
+      break;
+  }
+  return state;
+};
+
 //Store
-const store = createStore(combineReducers({ reducer }));
+const store = createStore(
+  combineReducers({ reducerData, reducerWord }),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 //Subsribe
 store.subscribe(() => {

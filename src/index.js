@@ -10,3 +10,5 @@ registerServiceWorker();
 
 store.subscribe(render);
 render();
+// ReactDOM.render(<App />, document.getElementById('root'));
+// registerServiceWorker();
