@@ -9,8 +9,13 @@ class App extends Component {
   }
 
   addData = () => {
-    let number = store.getState().reducer.number;
+    //store.getState()=> mengambil data dari global state
+    let number = store.getState().reducerData.number;
+
+    //menambahkan satu
     number = number + 1;
+
+    //store.dispatch()=> data akan find actionnya di reducer
     store.dispatch({
       type: 'INC',
       payload: number
@@ -18,7 +23,7 @@ class App extends Component {
   };
 
   minusData = () => {
-    let number = store.getState().reducer.number;
+    let number = store.getState().reducerData.number;
     number = number - 1;
     store.dispatch({
       type: 'DESC',
@@ -26,7 +31,7 @@ class App extends Component {
     });
   };
   render() {
-    const store1 = store.getState().reducer.number;
+    const store1 = store.getState().reducerData.number;
     return (
       <div className="App">
         <h1>{store1}</h1>

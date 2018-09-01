@@ -1,12 +1,13 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { logger } from 'redux-logger';
 
-//state
+//state => untuk initial state
 const initialStateData = {
   number: 0
 };
 
-//Reducer
-const reducer = (state = initialStateData, action) => {
+//Reducer => Mengurangi, supaya semua fungsi bisa dityampung dalam satu file, yaitu redux
+const reducerData = (state = initialStateData, action) => {
   switch (action.type) {
     case 'INC':
       state = { ...state, number: action.payload };
@@ -19,13 +20,21 @@ const reducer = (state = initialStateData, action) => {
   }
   return state;
 };
+//Combine reducers => untuk memasukan reducer lebih dari satu
+const combineReducer = combineReducers({ reducerData });
 
-//Store
-const store = createStore(combineReducers({ reducer }));
+//middleware => untuk debugging dalam redux
+//logger => package untuk mendebugg
+const middleware = applyMiddleware(logger);
 
-//Subsribe
+//Store => membuat data
+const store = createStore(combineReducer, middleware);
+
+//Subsribe => berlanganan, saya gunakan di index.js
 store.subscribe(() => {
   console.log(store.getState());
 });
+
+//promise_midleware
 
 export default store;
