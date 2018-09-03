@@ -1,18 +1,17 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
-
+import { API_URL } from '../core/Axios';
+import Axios from 'axios';
+import promiseMiddleware from 'redux-promise-middleware';
 //state
 const initialStateData = {
-  number: 0
+  todos: []
 };
 //Reducer
 const reducerData = (state = initialStateData, action) => {
   switch (action.type) {
-    case 'INC':
-      state = { ...state, number: action.payload };
-      break;
-    case 'DESC':
-      state = { ...state, number: action.payload };
+    case 'ALL_TODOS_FULFILLED':
+      state = { ...state, todos: action.payload.data };
       break;
 
     default:
@@ -26,14 +25,19 @@ const reducerData = (state = initialStateData, action) => {
 const combineReducer = combineReducers({ reducerData });
 
 //middleware
-const middleware = applyMiddleware(logger);
+const middleware = applyMiddleware(promiseMiddleware());
 
 //Store
 const store = createStore(combineReducer, middleware);
 
 //Subsribe
 store.subscribe(() => {
-  console.log(store.getState());
+  console.log(store.getState(), '>>>>>>>');
+});
+
+store.dispatch({
+  type: 'ALL_TODOS',
+  payload: Axios.get(`${API_URL}/api/list`)
 });
 
 export default store;
