@@ -8,28 +8,30 @@ class App extends Component {
     console.log(store.getState());
   }
 
-  // addData = () => {
-  //   //store.getState()=> mengambil data dari global state
-  //   let number = store.getState().reducerData.number;
+  addData = () => {
+    //store.getState()=> mengambil data dari global state
+    let number = store.getState().reducerData.number;
 
-  //   //menambahkan satu
-  //   number = number + 1;
+    //menambahkan satu
+    number = number + 1;
 
-  //   //store.dispatch()=> data akan find actionnya di reducer
-  //   store.dispatch({
-  //     type: 'INC',
-  //     payload: number
-  //   });
-  // };
+    //store.dispatch()=> data akan find actionnya di reducer
+    store.dispatch({
+      type: 'INC',
+      payload: number
+    });
+  };
 
-  // minusData = () => {
-  //   let number = store.getState().reducerData.number;
-  //   number = number - 1;
-  //   store.dispatch({
-  //     type: 'DESC',
-  //     payload: number
-  //   });
-  // };
+  minusData = () => {
+    let number = store.getState().reducerData.number;
+    number = number - 1;
+    store.dispatch({
+      type: 'DESC',
+      payload: number
+    });
+  };
+
+  addData = () => {};
   render() {
     const store1 = store.getState().reducerData;
     return (
